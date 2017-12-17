@@ -11777,12 +11777,15 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;TkAgg&#39;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 
 </div>
@@ -11800,7 +11803,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_schema</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;survey_results_schema.csv&#39;</span><span class="p">)</span>
@@ -11822,15 +11825,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">profession</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Professional&#39;</span><span class="p">]</span>
 <span class="n">profession</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">profession</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="c1">#num_profession[[&#39;Professional&#39;]].plot(kind=&#39;bar&#39;, stacked=False)</span>
-<span class="c1">#num_profession</span>
 </pre></div>
 
 </div>
@@ -12117,6 +12118,312 @@ UfhcsHcAl3EEF1B0CEHBCZzAQhBHsHi1G7iFWNhaCBaxyCvEq8irPV+VQCBJ9XMvIe18/GXPV33g
 3I6nnW4odWTloL9XSrlExAI4UquDppRy+LB0S23xnKKWH1dgBAyBeUQ8gBswAQbA7uUl1PJtz3tE
 zKhtoh61NbX5cdQ1sI+IFdB0vqjUgX8rSZIS20qSpMRwkCQlhoMkKTEcJEmJ4SBJSgwHSVJiOEiS
 EsNBkpQ8ARqtCIPumhCHAAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">currencies</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Currency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">currencies_value_in_dollar</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;British pounds sterling (£)&#39;</span><span class="p">:</span><span class="mf">1.33</span><span class="p">,</span> 
+                              <span class="s1">&#39;Canadian dollars (C$)&#39;</span><span class="p">:</span><span class="mf">0.78</span><span class="p">,</span>
+                                <span class="s1">&#39;U.S. dollars ($)&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="s1">&#39;Euros (€)&#39;</span><span class="p">:</span><span class="mf">1.17</span><span class="p">,</span>
+                                  <span class="s1">&#39;Brazilian reais (R$)&#39;</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span>
+                              <span class="s1">&#39;Indian rupees (?)&#39;</span><span class="p">:</span><span class="mf">0.016</span><span class="p">,</span>
+                              <span class="s1">&#39;Swiss francs&#39;</span><span class="p">:</span><span class="mf">1.01</span><span class="p">,</span>
+                              <span class="s1">&#39;Polish zloty (zl)&#39;</span><span class="p">:</span><span class="mf">0.28</span><span class="p">,</span>
+                              <span class="s1">&#39;Swedish kroner (SEK)&#39;</span><span class="p">:</span><span class="mf">0.12</span><span class="p">,</span>
+                              <span class="s1">&#39;Russian rubles (?)&#39;</span><span class="p">:</span><span class="mf">0.017</span><span class="p">,</span>
+                              <span class="s1">&#39;Australian dollars (A$)&#39;</span><span class="p">:</span><span class="mf">0.76</span><span class="p">,</span>
+                              <span class="s1">&#39;Mexican pesos (MXN$)&#39;</span><span class="p">:</span><span class="mf">0.052</span><span class="p">,</span>
+                              <span class="s1">&#39;Japanese yen (¥)&#39;</span><span class="p">:</span><span class="mf">0.0089</span><span class="p">,</span>
+                              <span class="s1">&#39;Chinese yuan renminbi (¥)&#39;</span><span class="p">:</span><span class="mf">0.15</span><span class="p">,</span>
+                              <span class="s1">&#39;Singapore dollars (S$)&#39;</span><span class="p">:</span><span class="mf">0.74</span><span class="p">,</span>
+                              <span class="s1">&#39;Bitcoin (btc)&#39;</span><span class="p">:</span><span class="mi">19596</span><span class="p">,</span>
+                              <span class="s1">&#39;South African rands (R)&#39;</span><span class="p">:</span><span class="mf">0.076</span>
+                             
+                             <span class="p">}</span>
+<span class="n">sal_no_normalize</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[[</span><span class="s1">&#39;Salary&#39;</span><span class="p">,</span><span class="s1">&#39;Currency&#39;</span><span class="p">]]</span>
+<span class="n">sal_no_normalize</span><span class="p">[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sal_no_normalize</span> <span class="o">=</span> <span class="n">sal_no_normalize</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">sal_no_normalize</span><span class="p">[</span><span class="s1">&#39;Currency&#39;</span><span class="p">])]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/naveen/anaconda3/lib/python3.5/site-packages/pandas/core/generic.py:3660: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+  self._update_inplace(new_data)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Currency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;British pounds sterling (£)&#39;, &#39;Canadian dollars (C$)&#39;,
+       &#39;U.S. dollars ($)&#39;, &#39;Euros (€)&#39;, &#39;Brazilian reais (R$)&#39;,
+       &#39;Indian rupees (?)&#39;, &#39;Polish zloty (zl)&#39;, &#39;Swedish kroner (SEK)&#39;,
+       &#39;Russian rubles (?)&#39;, &#39;Swiss francs&#39;, &#39;Australian dollars (A$)&#39;,
+       &#39;Mexican pesos (MXN$)&#39;, &#39;Japanese yen (¥)&#39;,
+       &#39;Chinese yuan renminbi (¥)&#39;, &#39;Singapore dollars (S$)&#39;,
+       &#39;Bitcoin (btc)&#39;, &#39;South African rands (R)&#39;], dtype=object)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">merged_salary_cur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">sal_no_normalize</span><span class="p">[</span><span class="s1">&#39;Salary&#39;</span><span class="p">],</span>
+                                     <span class="p">[</span><span class="n">currencies_value_in_dollar</span><span class="p">[</span><span class="n">currency</span><span class="p">]</span> 
+                                      <span class="k">for</span> <span class="n">currency</span> <span class="ow">in</span> <span class="n">sal_no_normalize</span><span class="p">[</span><span class="s1">&#39;Currency&#39;</span><span class="p">]]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-normalized-salary-in-USD">The normalized salary in USD<a class="anchor-link" href="#The-normalized-salary-in-USD">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">normalized_salary_usd</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">merged_salary_cur</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Average-salary-of-the-users-are">Average salary of the users are<a class="anchor-link" href="#Average-salary-of-the-users-are">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">normalized_salary_usd</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>213012.39052071219</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Box-plot-for-the-salaries">Box plot for the salaries<a class="anchor-link" href="#Box-plot-for-the-salaries">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">normalized_salary_usd</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/naveen/anaconda3/lib/python3.5/site-packages/matplotlib/figure.py:403: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+  &#34;matplotlib is currently using a non-GUI backend, &#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEDCAYAAADOc0QpAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAALEgAACxIB0t1+/AAAEMNJREFUeJzt3W+IXNd9xvHn6XjdpeRfibYhlezIFCUZMbFDMnVCWYiX
+0kZyX4g0LXhjEmKuEYZ46JuAXYbWoWEphRZCNk7E4hUmb8ZQalq1KHGgndQdHINHENurLDaLTWIp
+Aa/jJoWExaP1ry92JI02K82d3bu6O0ffDyyeOfd47vPq8fW5d844IgQASMtvlR0AAFA8yh0AEkS5
+A0CCKHcASBDlDgAJotwBIEGllrvtk7Zft72UY+4HbP+n7Rdsf9/2geuREQDGUdlX7o9LOpJz7j9K
++nZE3C7p7yT9/W6FAoBxV2q5R8TTkt4cHLP9B7a/a/uM7f+x/eH+ocOS/qv/ui3p2HWMCgBjpewr
+960sSGpExMclfVnSN/vjz0v68/7rz0h6p+33lpAPAPa8m8oOMMj2OyT9kaR/tn1x+Lf7//yypG/Y
+/qKkpyWdl7R+vTMCwDjYU+Wujf+T+EVEfHTzgYj4qfpX7v3/CHw2In5xnfMBwFjYU8syEfF/kl61
+/ZeS5A139F/vs30x719LOllSTADY88p+FLIl6QeSPmT7nO1M0r2SMtvPSzqryzdO75L0ku2XJb1P
+0lwJkQFgLJgtfwEgPXtqWQYAUIzSbqju27cvDh48WNbpAWAsnTlz5o2ImBo2r7RyP3jwoLrdblmn
+B4CxZPvHeeaxLAMACaLcASBBlDsAJIhyB4AEUe4AkCDKHRjQarVUq9VUqVRUq9XUarXKjgRsy17b
+OAwoTavVUrPZ1OLioqanp9XpdJRlmSRpdna25HTAaErbfqBerwfPuWMvqdVqmp+f18zMzKWxdrut
+RqOhpaWhvwQJXBe2z0REfeg8yh3YUKlUtLa2pomJiUtjvV5Pk5OTWl/npwOwN+Qtd9bcgb5qtapO
+p3PFWKfTUbVaLSkRsH2UO9DXbDaVZZna7bZ6vZ7a7bayLFOz2Sw7GjAybqgCfRdvmjYaDS0vL6ta
+rWpubo6bqRhLrLkDwBgpbM3d9knbr9ve8nEB2/fafsH2i7afufizeACA8uRZc39c0pFrHH9V0qci
+4iOSvippoYBcAIAdGLrmHhFP2z54jePPDLx9VtKBnccCAOxE0U/LZJK+c7WDto/b7trurq6uFnxq
+AMBFhZW77RltlPtDV5sTEQsRUY+I+tTU0F+JAgBsUyGPQtq+XdJjko5GxM+L+EwAwPbt+Mrd9q2S
+npT0+Yh4eeeRAAA7NfTK3XZL0l2S9tk+J+kRSROSFBEnJP2tpPdK+qZtSbqQ5xlMAMDuyfO0zDW/
+nhcR90u6v7BEAIAdY28ZAEgQ5Q4ACaLcASBBlDsAJIhyB4AEUe4AkCDKHQASRLkDQIIodwBIEOUO
+AAmi3AEgQZQ7MKDVaqlWq6lSqahWq6nVapUdCdiWQvZzB1LQarXUbDa1uLio6elpdTodZVkmSZqd
+veb+ecCe44go5cT1ej263W4p5wa2UqvVND8/r5mZmUtj7XZbjUZDS0tLJSYDLrN9Js+26pQ70Fep
+VLS2tqaJiYlLY71eT5OTk1pfXy8xGXBZ3nJnzR3oq1ar6nQ6V4x1Oh1Vq9WSEgHbR7kDfc1mU1mW
+qd1uq9frqd1uK8syNZvNsqMBI+OGKtB38aZpo9HQ8vKyqtWq5ubmuJmKscSaOwCMEdbcAeAGRrkD
+QIIodwBI0NByt33S9uu2t/wWhzd83faK7Rdsf6z4mACAUeS5cn9c0pFrHD8q6VD/77ikb+08FgBg
+J4aWe0Q8LenNa0w5JunbseFZSe+x/f6iAgIARlfEmvt+Sa8NvD/XH/sNto/b7trurq6uFnBqAMBW
+rusN1YhYiIh6RNSnpqau56kB4IZSRLmfl3TLwPsD/TEAQEmKKPdTkr7Qf2rmk5J+GRE/K+BzAQDb
+NHRvGdstSXdJ2mf7nKRHJE1IUkSckHRa0t2SViT9WtJ9uxUWAJDP0HKPiGvumhQbm9N8qbBEAIAd
+4xuqAJAgyh0AEkS5A0CCKHcASBDlDgAJotwBIEGUOwAkiHIHgARR7gCQIModABJEuQNAgih3AEgQ
+5Q4ACaLcASBBlDsAJIhyB4AEUe4AkCDKHQASRLkDQIIodwBIEOUOAAmi3AEgQZQ7ACQoV7nbPmL7
+Jdsrth/e4vi7bf+77edtn7V9X/FRAQB5DS132xVJj0o6KumwpFnbhzdN+5KkH0XEHZLukvRPtm8u
+OCsAIKc8V+53SlqJiFci4i1JT0g6tmlOSHqnbUt6h6Q3JV0oNCkAILc85b5f0msD78/1xwZ9Q1JV
+0k8lvSjpryLi7c0fZPu47a7t7urq6jYjAwCGKeqG6qcl/VDS70v6qKRv2H7X5kkRsRAR9YioT01N
+FXRqAMBmecr9vKRbBt4f6I8Nuk/Sk7FhRdKrkj5cTEQAwKjylPtzkg7Zvq1/k/QeSac2zfmJpD+W
+JNvvk/QhSa8UGRQAkN9NwyZExAXbD0p6SlJF0smIOGv7gf7xE5K+Kulx2y9KsqSHIuKNXcwNALiG
+oeUuSRFxWtLpTWMnBl7/VNKfFhsNALBdfEMVABJEuQNAgih3AEgQ5Q4ACaLcASBBlDsAJIhyB4AE
+Ue4AkCDKHQASRLkDQIIodwBIEOUOAAmi3AEgQZQ7MKDVaqlWq6lSqahWq6nVapUdCdiWXFv+AjeC
+VqulZrOpxcVFTU9Pq9PpKMsySdLs7GzJ6YDROCJKOXG9Xo9ut1vKuYGt1Go1zc/Pa2Zm5tJYu91W
+o9HQ0tJSicmAy2yfiYj60HmUO7ChUqlobW1NExMTl8Z6vZ4mJye1vr5eYjLgsrzlzpo70FetVtXp
+dK4Y63Q6qlarJSUCto9yB/qazaayLFO73Vav11O73VaWZWo2m2VHA0bGDVWg7+JN00ajoeXlZVWr
+Vc3NzXEzFWOJNXcAGCOsuQPADYxyB4AE5Sp320dsv2R7xfbDV5lzl+0f2j5r+7+LjQkAGMXQG6q2
+K5IelfQnks5Jes72qYj40cCc90j6pqQjEfET27+3W4EBAMPluXK/U9JKRLwSEW9JekLSsU1zPifp
+yYj4iSRFxOvFxgQAjCJPue+X9NrA+3P9sUEflPS7tr9v+4ztL2z1QbaP2+7a7q6urm4vMQBgqKJu
+qN4k6eOS/kzSpyX9je0Pbp4UEQsRUY+I+tTUVEGnBgBsludLTOcl3TLw/kB/bNA5ST+PiF9J+pXt
+pyXdIenlQlICAEaS58r9OUmHbN9m+2ZJ90g6tWnOv0matn2T7d+R9AlJy8VGBQDkNfTKPSIu2H5Q
+0lOSKpJORsRZ2w/0j5+IiGXb35X0gqS3JT0WEeyRCgAlYfsBABgjbD8AADcwyh0AEkS5A0CCKHcA
+SBDlDgAJotwBIEGUOwAkiHIHgARR7gCQIModABJEuQNAgih3AEgQ5Q4MaLVaqtVqqlQqqtVqarVa
+ZUcCtiXPj3UAN4RWq6Vms6nFxUVNT0+r0+koyzJJ0uzsbMnpgNGw5S/QV6vVND8/r5mZmUtj7XZb
+jUZDS0v8PAH2hrxb/lLuQF+lUtHa2pomJiYujfV6PU1OTmp9fb3EZMBl7OcOjKhararT6Vwx1ul0
+VK1WS0oEbB/lDvQ1m01lWaZ2u61er6d2u60sy9RsNsuOBoyMG6pA38Wbpo1GQ8vLy6pWq5qbm+Nm
+KsYSa+4AMEZYcweAGxjlDgAJylXuto/Yfsn2iu2HrzHvD21fsP0XxUUEAIxqaLnbrkh6VNJRSYcl
+zdo+fJV5/yDpe0WHBACMJs+V+52SViLilYh4S9ITko5tMa8h6V8kvV5gPgDANuQp9/2SXht4f64/
+dont/ZI+I+lbxUUDAGxXUTdUvybpoYh4+1qTbB+33bXdXV1dLejUAIDN8nyJ6bykWwbeH+iPDapL
+esK2JO2TdLftCxHxr4OTImJB0oK08Zz7dkMDAK4tT7k/J+mQ7du0Uer3SPrc4ISIuO3ia9uPS/qP
+zcUOALh+hpZ7RFyw/aCkpyRVJJ2MiLO2H+gfP7HLGQEAI8q1t0xEnJZ0etPYlqUeEV/ceSwAwE7w
+DVUASBDlDgAJotwBIEGUOwAkiHIHgARR7gCQIModABJEuQNAgih3AEgQ5Q4ACaLcASBBlDsAJIhy
+B4AEUe4AkCDKHQASRLkDA1qtlmq1miqVimq1mlqtVtmRgG3J9WMdwI2g1Wqp2WxqcXFR09PT6nQ6
+yrJMkjQ7O1tyOmA0jijnd6rr9Xp0u91Szg1spVaraX5+XjMzM5fG2u22Go2GlpaWSkwGXGb7TETU
+h86j3IENlUpFa2trmpiYuDTW6/U0OTmp9fX1EpMBl+Utd9bcgb5qtapOp3PFWKfTUbVaLSkRsH2U
+O9DXbDaVZZna7bZ6vZ7a7bayLFOz2Sw7GjAybqgCfRdvmjYaDS0vL6tarWpubo6bqRhLrLkDwBgp
+dM3d9hHbL9lesf3wFsfvtf2C7RdtP2P7ju2EBgAUY2i5265IelTSUUmHJc3aPrxp2quSPhURH5H0
+VUkLRQcFAOSX58r9TkkrEfFKRLwl6QlJxwYnRMQzEfG//bfPSjpQbEwAwCjylPt+Sa8NvD/XH7ua
+TNJ3tjpg+7jtru3u6upq/pQAgJEU+iik7RltlPtDWx2PiIWIqEdEfWpqqshTA4VgbxmkIs+jkOcl
+3TLw/kB/7Aq2b5f0mKSjEfHzYuIB1w97yyAlea7cn5N0yPZttm+WdI+kU4MTbN8q6UlJn4+Il4uP
+Cey+ubk5LS4uamZmRhMTE5qZmdHi4qLm5ubKjgaMLNdz7rbvlvQ1SRVJJyNizvYDkhQRJ2w/Jumz
+kn7c/1cuDHsOk+fcsdewtwzGQd7n3HN9QzUiTks6vWnsxMDr+yXdP2pIYC+5uLfM4K6Q7C2DccXe
+MkAfe8sgJewtA/SxtwxSwt4yADBG2M8dAG5glDsAJIhyB4AEUe4AkCDKHQASRLkDQIIodwBIEOUO
+AAmi3AEgQZQ7ACSIcgeABFHuAJAgyh0AEkS5A0CCKHcASBDlDgAJotwBIEGUOwAkiHIHgARR7gCQ
+oFzlbvuI7Zdsr9h+eIvjtv31/vEXbH+s+KjA7rP9G3/AOBpa7rYrkh6VdFTSYUmztg9vmnZU0qH+
+33FJ3yo4J7DrrlbkFDzGUZ4r9zslrUTEKxHxlqQnJB3bNOeYpG/Hhmclvcf2+wvOClwXEXHpDxhX
+N+WYs1/SawPvz0n6RI45+yX9bHCS7ePauLLXrbfeOmpWQPrKu3fto+ORd/3GObYaK9RXfrk7n4sb
+Xp5yL0xELEhakKR6vc5lEUa3i2V4cfll8Ip9qzFgHOQp9/OSbhl4f6A/NuocYCywxo4U5Flzf07S
+Idu32b5Z0j2STm2ac0rSF/pPzXxS0i8j4mebPwjYy652dc5VO8bR0Cv3iLhg+0FJT0mqSDoZEWdt
+P9A/fkLSaUl3S1qR9GtJ9+1eZGD3UORIRa4194g4rY0CHxw7MfA6JH2p2GgAgO3iG6oAkCDKHQAS
+RLkDQIIodwBIkMt6OsD2qqQfl3JyYLh9kt4oOwSwhQ9ExNSwSaWVO7CX2e5GRL3sHMB2sSwDAAmi
+3AEgQZQ7sLWFsgMAO8GaOwAkiCt3AEgQ5Q4ACaLcgQG2T9p+3fZS2VmAnaDcgSs9LulI2SGAnaLc
+gQER8bSkN8vOAewU5Q4ACaLcASBBlDsAJIhyB4AEUe7AANstST+Q9CHb52xnZWcCtoPtBwAgQVy5
+A0CCKHcASBDlDgAJotwBIEGUOwAkiHIHgARR7gCQoP8HBMT8VOMrwjMAAAAASUVORK5CYII=
 "
 >
 </div>
